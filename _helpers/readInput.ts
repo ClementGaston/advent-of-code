@@ -1,7 +1,13 @@
 import fs from "fs";
 
-export function readInput(dirPath: string): string[][] {
+export function getStringInput(dirPath: string): string {
 	const data = fs.readFileSync(`${dirPath}/input.txt`, "utf-8"); // Read the file synchronously
+
+	return data;
+}
+
+export function readInput(dirPath: string): string[][] {
+	const data = getStringInput(dirPath);
 	const lines = data.split(/\r?\n/); // Split file content into lines (handles Windows and Unix line endings)
 	const formattedLines = [];
 
@@ -12,7 +18,7 @@ export function readInput(dirPath: string): string[][] {
 }
 
 export function get1dInput(dirPath: string): string[] {
-	const data = fs.readFileSync(`${dirPath}/input.txt`, "utf-8"); // Read the file synchronously
+	const data = getStringInput(dirPath);
 	const lines = data.split(/\r?\n/); // Split file content into lines (handles Windows and Unix line endings)
 
 	return lines;
