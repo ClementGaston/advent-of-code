@@ -24,6 +24,12 @@ export function get1dInput(dirPath: string): string[] {
 	return lines;
 }
 
+export function get2dInput(dirPath: string): string[][] {
+	const data = get1dInput(dirPath);
+
+	return data.map((row) => row.split(""));
+}
+
 export function formatInputToLetterGrid(lines: string[]): string[][] {
 	return lines.map((line: string) => line.split(""));
 }
