@@ -24,10 +24,13 @@ export function get1dInput(dirPath: string): string[] {
 	return lines;
 }
 
-export function get2dInput(dirPath: string): string[][] {
+export function get2dInput(
+	dirPath: string,
+	splitStr: string | RegExp = "",
+): string[][] {
 	const data = get1dInput(dirPath);
 
-	return data.map((row) => row.split(""));
+	return data.map((row) => row.split(splitStr).filter(Boolean));
 }
 
 export function formatInputToLetterGrid(lines: string[]): string[][] {
