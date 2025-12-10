@@ -54,24 +54,21 @@ function getGroup(n?: number) {
 			continue;
 		}
 
+		if (
+			(groupSize[group[link.point1]] || 1) +
+				(groupSize[group[link.point2]] || 1) ===
+			inputs.length
+		) {
+			return {
+				group: Object.entries(groupSize).sort((a, b) => b[1] - a[1]),
+				lastLink: link,
+			};
+		}
+
 		// ! Could be way cleaner
 		if (group[link.point1] && group[link.point2]) {
 			const newGroup = group[link.point1];
 			const oldGroup = group[link.point2];
-			console.log(
-				i,
-				groupSize[newGroup],
-				groupSize[oldGroup],
-				inputs.length,
-			);
-			if (groupSize[newGroup] + groupSize[oldGroup] === inputs.length) {
-				return {
-					group: Object.entries(groupSize).sort(
-						(a, b) => b[1] - a[1],
-					),
-					lastLink: link,
-				};
-			}
 
 			for (const [key, value] of Object.entries(group)) {
 				if (value === oldGroup) group[key] = newGroup;
@@ -110,7 +107,6 @@ for (let i = 0; i < 3; i++) {
 }
 
 const result2 = getGroup();
-console.log(result2);
 let lastLinkMultiplication = 0;
 if (result2.lastLink) {
 	lastLinkMultiplication =
